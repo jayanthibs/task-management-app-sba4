@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="main-section">
+      <section>
+        <h1>Task Management Application</h1>
+        <form class="task-section">
+          <label for="taskName">Task Name</label>
+          <input type="text" id="taskName" placeholder="Enter the task" /><br />
+          <label for="taskCategory">Category</label>
+          <input
+            type="text"
+            id="taskCategory"
+            placeholder="Enter the category"
+          /><br />
+          <label for="taskDeadline">Deadline</label>
+          <input
+            type="Date"
+            id="taskDeadline"
+            placeholder="Enter the deadline"
+          /><br />
+          <label for="taskStatus">Status</label>
+          <select id="taskStatus" name="status">
+            <!--<option value="">--check the status--</option>-->
+            <option value="In Progress" selected>In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option></select
+          ><br />
+          <button id="addTaskButton">Add Task</button>
+          </form>
+
+          <h3>Tasks</h3>
+
+          <ul id="taskList"></ul>
+
+          <div class="filter-section">
+
+          <h3>Filter Task</h3>
+
+          <select id="filterCategory" name="filterCategory">
+            <option value="" selected>--select the category--</option>
+            <option value="SBA">SBA</option>
+            <option value="KBA">KBA</option>
+            <option value="LAB">LAB</option></select
+          ></div>
+        
+      </section>
+    </main>
+  </body>
+</html>
