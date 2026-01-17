@@ -59,11 +59,15 @@ function checkOverdue(task) {
 }
 
 // function to add task to ul list
-function renderTask() {
+function renderTask(filter = "") {
   //clearing the ul list
   taskList.innerHTML = "";
   // Loop for accessing the objects in the array
   for (let i = 0; i < taskArray.length; i++) {
+    //filtering the tasks based on the category
+
+    if (filter && taskArray[i].category.toLowerCase() !== filter.toLowerCase())
+      continue;
     //Calling the checkOverdue function to check the deadline
     checkOverdue(taskArray[i]);
 
@@ -71,13 +75,13 @@ function renderTask() {
 
     let listItem = document.createElement("li");
     const taskNameSpan = document.createElement("span");
-    taskNameSpan.innerText = taskArray[i].taskname;
+    taskNameSpan.textContent = taskArray[i].taskname;
     listItem.appendChild(taskNameSpan);
     const categorySpan = document.createElement("span");
-    categorySpan.innerText = taskArray[i].category;
+    categorySpan.textContent = taskArray[i].category;
     listItem.appendChild(categorySpan);
     const deadlineSpan = document.createElement("span");
-    deadlineSpan.innerText = taskArray[i].deadline;
+    deadlineSpan.textContent = taskArray[i].deadline;
     listItem.appendChild(deadlineSpan);
 
     // Creating span and styling the Overdue tasks
@@ -104,6 +108,7 @@ function renderTask() {
         taskArray[i].status = e.target.value;
         // Adding objects to the local storage
         setLocalStorage();
+        renderTask(filter);
       });
 
       listItem.appendChild(statusDropdown);
@@ -117,32 +122,5 @@ function renderTask() {
 
 //Adding an event listener to filter category
 filterCategoryDropdown.addEventListener("change", function () {
-  filterCategory();
-
-  filterCategoryDropdown.value = "";
+  renderTask(this.value);
 });
-
-// Creating filter function to filter the tasks based o the category
-function filterCategory() {
-  taskList.innerHTML = "";
-
-  for (let i = 0; i < taskArray.length; i++) {
-    if (
-      filterCategoryDropdown.value.toLowerCase() ===
-      taskArray[i].category.toLowerCase()
-    ) {
-
-      
-      let listItem = document.createElement("li");
-      listItem.textContent =
-        taskArray[i].taskname +
-        "  " +
-        taskArray[i].category +
-        "  " +
-        taskArray[i].deadline +
-        "  " +
-        taskArray[i].status;
-      taskList.appendChild(listItem);
-    }
-  }
-}
